@@ -92,3 +92,7 @@ This Flask web application provides secure user registration and login functiona
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Credits
+
+Designed by Nikhil.
