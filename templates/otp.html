@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* Change background color if needed */
+        }
+
+        .centered-text {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h2 {
+            color: #333; /* Change heading color if needed */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333; /* Label color */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 150px; /* Adjust width */
+            box-sizing: border-box;
+            border: 1px solid #ccc; /* Add border for input fields */
+            border-radius: 5px; /* Rounded corners */
+            outline: none; /* Remove default input outline */
+            font-size: 16px; /* Adjust font size */
+            transition: border-color 0.3s ease; /* Smooth transition for border color */
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff; /* Change border color on focus */
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px; /* Adjust padding */
+            margin-bottom: 20px;
+            width: auto; /* Auto width */
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+
+        .flash-message {
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .flash-message.error {
+            background-color: #ffcccc;
+            color: #cc0000;
+        }
+
+        .flash-message.success {
+            background-color: #ccffcc;
+            color: #006600;
+        }
+
+        /* QR Code styling */
+        #qr_code {
+            width: 150px; /* Adjust width */
+            height: 150px; /* Adjust height */
+            margin: 0 auto 20px; /* Center and add margin */
+            display: block; /* Make it a block element for centering */
+            border: 1px solid #ccc; /* Add border */
+            border-radius: 5px; /* Rounded corners */
+            background-color: #fff; /* White background */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+        }
+
+        .error-message {
+            color: red; /* Set color to red */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="centered-text">
+        <h2>OTP Verification</h2>
+        <!-- Display the QR code here -->
+        <img id="qr_code" src="data:image/png;base64,{{ generate_qrcode(username) }}" alt="TOTP QR Code">
+
+        <!-- OTP verification form -->
+        <form method="post" action="{{ url_for('verify_otp', username=username) }}">
+            <label for="otp_code">Enter OTP:</label>
+            <input type="text" id="otp_code" name="otp_code" required maxlength="6" required autocomplete="off"> <!-- Set maxlength to 6 -->
+            <br>
+            <input type="submit" value="Verify OTP">
+        </form>
+
+        <!-- Display error message for OTP validation -->
+        {% if message %}
+        <p class="error-message">{{ message }}</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>

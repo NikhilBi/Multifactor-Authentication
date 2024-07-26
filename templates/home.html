@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url("{{ url_for('static', filename='images/back2.jpg') }}");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .logo {
+            width: 150px; /* Adjust size of the logo */
+        }
+
+        .container {
+            text-align: center;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .home_content {
+            text-align: center;
+            margin-top: 100px;
+            margin-top: -20vh;
+            color: white; /* Adjust text color to contrast with background */
+        }
+
+        .home_content h1 {
+            font-size: 50px;
+            margin-bottom: 20px; /* Adjust margin */
+        }
+
+        .home_content p {
+            font-size: 25px;
+            line-height: 1.5;
+            margin-bottom: 40px;
+        }
+
+        .home_buttons {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 5%;
+        }
+
+        .home_buttons a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 30px 50px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #0f4da3;
+            border-radius: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .home_buttons a:hover {
+            background-color: #0056b3;
+        }
+
+        .made-in-india {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 18px;
+        }
+
+        .home_content h1 .multifactor {
+            color: blue; /* Color for 'multifactor' */
+        }
+
+        .home_content h1 .authentication {
+            color: white; /* Color for 'authentication' */
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="logo-container">
+        <img class="logo" src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo" width="100">
+    </div>
+
+    <div class="home_content">
+        <h2 style="color: #169ec7;">Nikhil's Innovatory Presents</h2>
+        <h1><span class="multifactor">MULTIFACTOR</span> <span class="authentication">AUTHENTICATION</span></h1>
+        <div class="container">
+            <p style="color: lightblue;">Discover the power of multifactor authentication with our innovative security solutions. Join 
+                us in safeguarding your online presence and take control of your digital identity today.
+            </p>
+        </div>
+    </div>
+
+    <div class="home_buttons">
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}">Register</a>
+    </div>
+
+    <div class="made-in-india">
+        Proudly Made In India.
+    </div>
+    
+</body>
+
+</html>

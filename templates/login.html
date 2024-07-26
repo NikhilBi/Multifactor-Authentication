@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Internal CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-image: url("{{ url_for('static', filename='images/back1.webp') }}");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            min-height: 100vh;
+        }
+
+        .centered-text {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            text-align: center; /* Center the form */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow for better appearance */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333; /* Label color */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 25px); /* Make input boxes smaller */
+            max-width: 300px; /* Limit max width */
+            padding: 10px;
+            margin: 0 auto; /* Center the input boxes */
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            outline: none; /* Remove default input outline */
+        }
+
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .show-password {
+            margin-left: 5px;
+            color: #666; /* Checkbox color */
+        }
+
+        .show-password-label {
+            color: #666; /* Checkbox label color */
+            font-size: 14px; /* Checkbox label font size */
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+    <script>
+        function togglePasswordVisibility() {
+            var passwordField = document.getElementById("password");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="centered-text">
+        <h2 style="color: blue;">Login</h2>
+        <form method="post" action="{{ url_for('login') }}">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required autocomplete="off">
+            <!-- Display error message for username -->
+            {% if message_username %}
+            <div class="error-message">{{ message_username }}</div>
+            {% endif %}
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required autocomplete="off">
+            <!-- Display error message for password -->
+            {% if message_password %}
+            <div class="error-message">{{ message_password }}</div>
+            {% endif %}
+            <br>
+            <input type="checkbox" onclick="togglePasswordVisibility()" class="show-password">
+            <label for="show_password" class="show-password-label">Show Password</label>
+            <br>
+            <button type="submit">Login</button>
+        </form>
+        {% if message %}
+        <p>{{ message }}</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>

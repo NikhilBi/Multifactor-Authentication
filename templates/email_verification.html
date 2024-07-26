@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* Change background color if needed */
+        }
+
+        .centered-text {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h2 {
+            color: #007bff; /* Change heading color if needed */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333; /* Label color */
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"] {
+            padding: 10px;
+            margin: 0 auto; /* Center the input box */
+            width: 200px; /* Set a fixed width */
+            box-sizing: border-box;
+            border: 1px solid #ccc; /* Add border for input fields */
+            border-radius: 5px; /* Rounded corners */
+            outline: none; /* Remove default input outline */
+            font-size: 16px; /* Adjust font size */
+            display: block; /* Ensure each input field appears on its own line */
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff; /* Change border color on focus */
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px; /* Adjust padding */
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+
+        .flash-message {
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .flash-message.error {
+            background-color: #ffcccc;
+            color: #cc0000;
+        }
+
+        .flash-message.success {
+            background-color: #ccffcc;
+            color: #006600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="centered-text">
+        <h2>Email Verification</h2>
+        <form method="post" action="{{ url_for('verify_email', username=username) }}">
+            <label for="email_verification_code">Enter Email Verification Code:</label>
+            <input type="text" id="email_verification_code" name="email_verification_code" required autocomplete="off">
+            <br>
+            <input type="submit" value="Verify Email">
+        </form>
+        <p>{{ message }}</p>
+    </div>
+</body>
+
+</html>

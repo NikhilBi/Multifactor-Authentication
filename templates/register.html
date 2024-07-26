@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-image: url("{{ url_for('static', filename='images/back3.webp') }}");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .centered-text {
+            text-align: center;
+        }
+
+        .centered-text h1{
+            text-align: center;
+            margin-bottom: 5%;
+            color: rgb(255, 255, 255);
+            font-size: 50px;
+        }
+
+        .form-container {
+            margin-top: -60px; /* Adjust this value to move the form further up */
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            text-align: center; /* Center the form */
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Add shadow */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333; /* Label text color */
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 80%; /* Make input boxes full width */
+            max-width: 300%;
+            padding: 10px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease; /* Smooth transition for border color */
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff; /* Change border color on focus */
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition for background color */
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3; /* Change background color on hover */
+        }
+
+        .flash-messages {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .flash-message {
+            padding: 10px;
+            border-radius: 5px;
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+
+        .flash-message.success {
+            background-color: #28a745; /* Green color for success message */
+        }
+
+        .flash-message.error {
+            background-color: #dc3545; /* Red color for error message */
+        }
+
+        p {
+            color: #d0d0d0; /* Text color for paragraph */
+            font-size: 25px;
+        }
+
+        a {
+            color: #d8ab17; /* Link color */
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline; /* Underline link on hover */
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Flash messages block -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for message in messages %}
+        <div class="flash-message {{ message[1] }}">{{ message[0] }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <div class="centered-text">
+        <h1>Registration</h1>
+        <div class="form-container">
+            <form method="post" action="{{ url_for('register') }}" onsubmit="return validatePassword()">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                <!-- Display error message for username -->
+                {% if message_username %}
+                <div class="error-message">{{ message_username }}</div>
+                {% endif %}
+                <br>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <!-- Display error message for email -->
+                {% if message_email %}
+                <div class="error-message">{{ message_email }}</div>
+                {% endif %}
+                <br>
+                <label for="password">Create Password</label>
+                <input type="password" id="password" name="password" required autocomplete="off">
+                <!-- Display error message for password -->
+                {% if message_password %}
+                <div class="error-message">{{ message_password }}</div>
+                {% endif %}
+                <br>
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" required autocomplete="off">
+                <!-- Display error message for confirm password -->
+                {% if message_confirm_password %}
+                <div class="error-message">{{ message_confirm_password }}</div>
+                {% endif %}
+                <button type="submit">Register</button>
+            </form>
+        </div>
+        <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+    </div>
+</body>
+
+</html>
